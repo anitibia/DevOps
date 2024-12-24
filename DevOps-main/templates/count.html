@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form action="{{ url }}", method="POST", enctype="multipart/form-data">
+    <div class="mb-3">
+        <label for="stud_form">Формы обучения</label>
+        <select class="form-select" name="stud_form_id" id="stud_form">
+            {% for stud_form in stud_forms %}
+                <option value="{{ stud_form}}" {% if stud_form in selected_name_list %} selected {% endif %}>{{ stud_form }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3 text-center">
+        <button type="submit" class="btn btn-primary">Запросить</button>
+    </div>
+</form>
+{% if counted %}
+    <div>Людей на данной форме обучения: {{ counted }}</div>
+{% endif %}
+{% endblock %}

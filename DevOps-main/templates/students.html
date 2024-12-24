@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+      <h1> Информация о студентах </h1>
+
+      <table class="table table-dark">
+      
+        <thead>
+          <tr>
+            <th scope="col">Год</th>
+            <th scope="col">Студент</th>
+            <th scope="col">Форма обучения</th>
+            <th scope="col">Номер группы</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for student in students %}
+          <form action="http://localhost:5000/students" method="post" name="studends">
+            <tr>
+              <input type="text" class="d-none" name="id" value="{{student.id}}">
+              <input type="text" class="d-none" name="update" value="0">
+                <td> <input type="text" placeholder="{{student.date}}" required name="year"> </td>
+                <td> <input type="text" placeholder="{{student.last_name + ' ' + student.first_name + ' ' + student.middle_name}}" required name="name"> </td>
+                <td><select name="format">
+                    {% if student.form == 'Заочная'%}
+                    <option value="Заочная" selected>Заочная</option>
+                    <option value="Вечерняя">Вечерняя</option>
+                    <option value="Дневная">Дневная</option>
+                    {% endif %}
+                    {% if student.form == 'Вечерняя'%}
+                    <option value="Заочная">Заочная</option>
+                    <option value="Вечерняя" selected>Вечерняя</option>
+                    <option value="Дневная">Дневная</option>
+                    {% endif %}
+                    {% if student.form == 'Дневная'%}
+                    <option value="Заочная">Заочная</option>
+                    <option value="Вечерняя">Вечерняя</option>
+                    <option value="Дневная" selected>Дневная</option>
+                    {% endif %}
+                  </select></td>
+                <td><input type="text" placeholder="{{student.group}}" required name="group"> </td>
+                  <td><button name="saving" type="submit">Сохранить</button></td>
+              </tr>
+          </form>
+          {% endfor %}
+          <form action="http://localhost:5000/students" method="post">
+            <input type="text" class="d-none" name="update" value="1">
+            <tr>
+                <td> <input  type="text" placeholder="Введите год" name="year" required> </td>
+                <td> <input type="text" placeholder="Введите ФИО" name="name" required> </td>
+                <td><select name="format">
+                    <option value="Заочная">Заочная</option>
+                    <option value="Вечерняя">Вечерняя</option>
+                    <option value="Дневная">Дневная</option>
+                  </select></td>
+                <td><input type="text" placeholder="Введите номер группы" name="group" required> </td>
+                  <td><button name="saving" type="submit">Сохранить</button></td>
+              </tr>
+          </form>
+        </tbody>
+      </table> 
+{% endblock %}

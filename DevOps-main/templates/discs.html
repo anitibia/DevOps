@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+
+        <h1> Учебный план </h1>
+
+      <table class="table table-dark">
+      
+        <thead>
+          <tr>
+            <th scope="col">Название специальности</th>
+            <th scope="col">Название дисциплины</th>
+            <th scope="col">Порядковый номер семестра</th>
+            <th scope="col">Количество часов</th>
+            <th scope="col">Сессия</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for disc in disciplines %}
+          <form action="http://localhost:5000/discs" method="post">
+            <tr>
+              <input type="text" class="d-none" name="id" value="{{disc.id}}">
+              <input type="text" class="d-none" name="update" value="0">
+                <td> <input  type="text" name="spec_name" required placeholder="{{disc.spec_name}}"> </td>
+                <td> <input type="text" name="disc_name" required placeholder="{{disc.disc_name}}"> </td>
+                <td> <input type="text" name="sem" required placeholder="{{disc.sem}}"> </td>
+                <td><input type="text" name="amount" required placeholder="{{disc.amount}}"> </td>
+                <td><select name="exam">
+                    {% if disc.exam == True%}
+                    <option value="0">Зачет</option>
+                    <option value="1" selected>Экзамен</option>
+                    {% endif %}
+                    {% if disc.exam == False%}
+                    <option value="0" selected>Зачет</option>
+                    <option value="1">Экзамен</option>
+                    {% endif %}
+                  </select></td>
+                  <td><button name="saving" type="submit">Сохранить</button></td>
+              </tr>
+          </form>
+          {% endfor %}
+
+        <form action="http://localhost:5000/discs" method="post">
+            <tr>
+              <input type="text" class="d-none" name="id">
+              <input type="text" class="d-none" name="update" value="1">
+                <td> <input  type="text" name="spec_name" required placeholder="Название специальности"> </td>
+                <td> <input type="text" name="disc_name" required placeholder="Название дисциплины"> </td>
+                <td> <input type="text" name="sem" required placeholder="Порядковый номер семестра"> </td>
+                <td><input type="text" name="amount" required placeholder="Количество часов"> </td>
+                <td><select name="exam">
+                    <option value="0">Зачет</option>
+                    <option value="1">Экзамен</option>
+                  </select></td>
+                  <td><button name="saving" type="submit">Сохранить</button></td>
+              </tr>
+          </form>
+        </tbody>
+      </table> 
+
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form action="{{ url }}", method="POST", enctype="multipart/form-data">
+    <div class="mb-3">
+        <label for="disc">Дисциплины</label>
+        <select class="form-select" name="disc_id" id="disc">
+            {% for disc in discs %}
+                <option value="{{ disc }}" {% if disc[0] in selected_name_list %} selected {% endif %}>{{ disc[0] }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3 text-center">
+        <button type="submit" class="btn btn-primary">Запросить</button>
+    </div>
+</form>
+{% if hours %}
+    <div>Количество часов: {{ hours[0] }}</div>
+{% endif %}
+
+{% if exams %}
+    <div>По этой дисциплине есть экзамены</div>
+{% endif %}
+
+{% if goals %}
+    <div>По этой дисциплине есть зачеты</div>
+{% endif %}
+
+{% endblock %}
