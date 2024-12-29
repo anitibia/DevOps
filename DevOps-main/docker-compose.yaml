@@ -15,7 +15,7 @@ services:
       - ./postgres-data:/var/lib/postgresql/data
 
   flaskproj:   
-    build:
+    build: 
       context: .
       dockerfile: Dockerfile
     container_name: Dcompose-flask
