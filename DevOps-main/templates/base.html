@@ -16,12 +16,15 @@
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
+                <a class="btn navbar-brand btn-lg" href="{{ url_for('users') }}">Создать пользователя</a>
                 <a class="btn navbar-brand btn-lg" href="{{ url_for('index') }}">Главная страница</a>
                 <a class="btn navbar-brand btn-lg" href="{{ url_for('count') }}">Подсчет людей на конкретной форме обучения</a>
                 <a class="btn navbar-brand btn-lg" href="{{ url_for('disciplines') }}">Информация о дисциплине</a>
                 <a class="btn navbar-brand btn-lg" href="{{ url_for('students') }}">Информация о студентах</a>
                 <a class="btn navbar-brand btn-lg" href="{{ url_for('disc') }}">Информация о дисциплинах</a>
                 <a class="btn navbar-brand btn-lg" href="{{ url_for('goals') }}">Журнал успеваемости</a>
+                
+
                 {% if current_user.is_authenticated %}
                 <div class="col align-self-end mx-3">
                     <p class="text-black text-end">

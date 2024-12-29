@@ -8,21 +8,15 @@ import json
 from sqlalchemy import func, insert, text
 import time
 from prometheus_client import Counter, generate_latest, REGISTRY
+from faker import Faker
 
 
-
-while 1:
-    try:
-        e = create_engine('postgresql+psycopg2://devOps-user:909909@localhost:5432/devOps-db').connect()
-        #e = create_engine('postgresql+psycopg2://post_user:qwerty1234@postgres-db:5432/postgres', connect_args={"options": "-c client_encoding=utf8"}).connect()
-
-        e.execute(text('select 1'))
-
-    except exc.OperationalError:
-        print('Waiting for database...')
-        time.sleep(1)
-    else:
-        break
+try:
+    engine = create_engine('postgresql+psycopg2://postgres:909909@postgres-db:5432/devOps-db')
+    connection = engine.connect()
+    print("Connection successful!")
+except Exception as e:
+    print(f"Error: {e}")
 
 print('Connected! pp@')
 
@@ -200,31 +194,39 @@ def goals():
             db.session.commit()
     return redirect(url_for('goals'))
 
+
+
+@app.route('/users', methods = ['GET', 'POST'])
+def users():
+    fake = Faker()  # Инициализация Fake
+    if request.method == 'POST':
+        # Генерация случайных данных
+        fake_user = User(
+            login=fake.unique.user_name(),
+            password_hash=fake.password(),
+            last_name=fake.last_name(),
+            first_name=fake.first_name(),
+            middle_name=fake.random_element(elements=('d','ds','a','df','we','wwd','rwdd')),
+            form='Дневная',
+            date=fake.year(),
+            group=fake.random_element(elements=('221-351', '222-352')),
+            role_id=1
+        )
+        
+        # Добавление пользователя в базу данных
+        with app.app_context():
+            db.session.add(fake_user)
+            db.session.commit()
+    elif request.method == 'GET':
+        return render_template('users.html')
+
+    return redirect(url_for('index'))
+
+
+
 @app.route('/metrics')
 def metrics():
     return generate_latest(REGISTRY), 200, {'Content-Type': 'text/plain'}
 
-'''
-# роли
-admin_role = Role(role_name='AAdmin', description='Administrator')
-moder_role = Role(role_name='mmoder', description='Moderator')
-with app.app_context():
-    db.session.add_all([admin_role, moder_role])
-    db.session.commit()
 
-# тестовый пользователь
-admin_user = User(
-    login='admin',
-    password_hash='hashed_password', #User.set_password()
-    last_name='Admin',
-    first_name='User',
-    middle_name='Test',
-    form='Дневная',
-    date=2024,
-    group='A',
-    role_id=1
-)
-admin_user.set_password('Apass')
-with app.app_context():
-    db.session.add(admin_user)
-    db.session.commit()'''
+

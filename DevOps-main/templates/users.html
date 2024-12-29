@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form action="{{ url_for('users') }}", method="POST">
+
+    <div class="mb-3 text-center">
+        <button type="submit" class="btn btn-primary">Сгенерировать студента</button>
+    </div>
+</form>
+
+{% endblock %}
