@@ -14,7 +14,7 @@ services:
       - ./postgres-init:/docker-entrypoint-initdb.d
       - ./postgres-data:/var/lib/postgresql/data
 
-  flaskproj:    
+  flaskproj: 
     build:
       context: .
       dockerfile: Dockerfile
