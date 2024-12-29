@@ -202,8 +202,11 @@ def users():
     if request.method == 'POST':
         # Генерация случайных данных
         fake_user = User(
-            login=fake.unique.user_name(),
-            password_hash=fake.password(),
+            # there be changed
+            login=fake.unique.random_element(elements=('aa','bb','cc','dd','ff','gg','hh')),
+            password_hash=fake.random_element(elements=('11','22','33','44','55','66','77')),
+            # end changed area
+
             last_name=fake.last_name(),
             first_name=fake.first_name(),
             middle_name=fake.random_element(elements=('d','ds','a','df','we','wwd','rwdd')),
