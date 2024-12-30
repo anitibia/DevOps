@@ -1,6 +1,7 @@
 
 
 import unittest
+import time 
 # print("1")
 # try:
 #     from msvcrt import getch
@@ -25,6 +26,7 @@ import unittest
 
 
 print('Tests started')
+time.sleep(8)
 
 from app import app, db, migrate 
 
