@@ -1,4 +1,4 @@
-SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:909909@postgres-db:5433/devOps-db'
+SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:909909@postgres-db:5432/devOps-db'
 
 SECRET_KEY = 'qwerty1234'
 SQLALCHEMY_TRACK_MODIFICATIONS = True
