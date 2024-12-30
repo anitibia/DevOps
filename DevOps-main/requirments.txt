@@ -6,6 +6,7 @@ Flask
 Flask-Login
 Flask-Migrate
 Flask-SQLAlchemy
+Flask-Testing
 greenlet
 importlib-metadata
 itsdangerous
