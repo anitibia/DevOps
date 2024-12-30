@@ -53,7 +53,7 @@ def increment_function_calls(endpoint):
 def index():
     return render_template('index.html')
 
-@app.route('/count', methods=['GET', 'POST'])
+@app.route('/codddunt', methods=['GET', 'POST'])
 def count():
     students = User.query.all()
     counted = {
