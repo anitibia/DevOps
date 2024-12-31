@@ -20,6 +20,7 @@ class User(db.Model, UserMixin):
     form = db.Column(db.String(50), nullable=False)
     date = db.Column(db.Integer, nullable=False)
     group = db.Column(db.String(50))
+    description = db.Column(db.String(100))
     role_id = db.Column(db.Integer, db.ForeignKey('roles.id', ondelete='CASCADE'), nullable=False)
 
     def __repr__(self):

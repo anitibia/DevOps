@@ -15,7 +15,7 @@ Mako
 faker
 MarkupSafe
 psycopg2-binary
-mysql-connector-python
+mysql-connector-python  
 prometheus_client
 python-dotenv
 SQLAlchemy
