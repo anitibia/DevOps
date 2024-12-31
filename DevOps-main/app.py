@@ -10,7 +10,6 @@ import time
 from prometheus_client import Counter, generate_latest, REGISTRY
 from faker import Faker
 
-#s#@#d
 
 try:
     engine = create_engine('postgresql+psycopg2://postgres:909909@postgres-db:5432/devOps-db')
